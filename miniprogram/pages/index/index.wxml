@@ -1,0 +1,17 @@
+<view class="page">
+  <view class="weui-footer_fixed-bottom">
+    <view class="weui-tabbar">
+
+      <navigator url="/pages/movies/movies" class="weui-tabbar__item"> 
+          <image src="/images/fire.png" class="weui-tabbar__icon"></image>
+          <view class="weui-tabbar__label">热门</view>
+      </navigator>
+
+      <navigator url="/pages/my/my" class="weui-tabbar__item">
+          <image src="/images/account.png" class="weui-tabbar__icon"></image>
+          <view class="weui-tabbar__label">我的</view>
+      </navigator>
+
+    </view>
+  </view>
+</view>

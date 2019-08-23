@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/addcomment/addcomment",
+    "pages/movies/movies",
+    "pages/detail/detail",
+    "pages/my/my"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "电影小程序",
+    "navigationBarBackgroundColor": "#EDEDED",
+    "backgroundColor": "#EDEDED"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

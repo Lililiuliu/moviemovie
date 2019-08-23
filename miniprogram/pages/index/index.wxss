@@ -1,0 +1,19 @@
+.weui-tabbar{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+}
+
+.weui-tabbar__item{
+  display: flex;
+  align-items: center;
+  justify-content:center;
+}
+
+.weui-tabbar__label{
+  font-size: 17px;
+  padding-inline-start: 10px;
+  font-weight: bolder;
+  color: #353535;
+}

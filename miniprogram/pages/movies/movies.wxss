@@ -1,0 +1,45 @@
+page {
+  padding-left: 15px;
+  padding-right: 15px;
+  box-sizing: border-box;
+  padding-top: 20px;
+}
+
+.movie-item {
+  background: white;
+  height: 150px;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  box-sizing:border-box;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.movie-img {
+  height: 100%;
+  width: 107px;
+}
+
+.movie-info {
+  padding-top: 30px;
+  padding-left:15px;
+  padding-right: 15px;
+  box-sizing:border-box;
+  width: calc(100% - 110px);
+}
+
+.movie-name {
+  font-size: 17px;
+  font-weight: bolder;
+  margin-bottom: 15px;
+  color:#353535;
+}
+
+.movie-genre {
+  font-size: 14px;
+  color:#888888;
+}
+
+

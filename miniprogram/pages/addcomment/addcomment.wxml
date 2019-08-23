@@ -1,0 +1,14 @@
+
+  <view class="comment-cart">
+    <view class="info">
+      <image class="cover" src="{{detail.img}}" mode="aspectFit"></image>
+      <view class="name">{{detail.name}}</view>
+      <textarea class="input-comment" placeholder="请输入你的影片内容" adjust-position="true" bindinput="getText" auto-focus="true"></textarea>
+      <button >录音</button>
+    </view>
+    <view class="bg"></view>
+  </view>
+
+ <view class="footer" bindtap="done" hover-class="footer-hover">
+ 完成
+ </view>

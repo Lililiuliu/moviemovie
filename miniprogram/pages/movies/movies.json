@@ -1,0 +1,8 @@
+{
+  "usingComponents": {},
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "热门电影",
+  "navigationBarBackgroundColor": "#EDEDED",
+  "backgroundColor": "#EDEDED",
+  "enablePullDownRefresh": true
+}

@@ -1,0 +1,17 @@
+<view class="page">
+  <view class="detail-card">
+    <image class="cover" src="{{detail.img}}" mode="aspectFit"></image>
+    <view class="detail">
+      <view class="name">{{detail.name}}</view>
+      <view class="summary">{{detail.summary}}</view>
+    </view>
+    <view class="button-sp-area">
+      <button type="default" plain="true">
+        <image hidden="{{screenSize}}" class="btn-icon" src="/images/eye.png" mode="aspectFit "></image>查看影评</button>
+      <button type="default" plain="true" bindtap="open">
+        <image hidden="{{screenSize}}" class="btn-icon" src="/images/comment-multiple-outline.png " mode="aspectFit"></image>添加影评
+      </button>
+    </view>
+    <view class="bg "></view>
+  </view>
+</view>
