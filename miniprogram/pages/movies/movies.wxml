@@ -4,7 +4,7 @@
       <image class=" movie-img " src="{{item.img}} " mode="aspectFill"></image>
       <view class="movie-info ">
         <view class="movie-name ">{{item.name}}</view>
-        <view class="movie-genre ">标签：{{item.genre}}</view>
+        <view class="movie-genre ">分类：{{item.genre}}</view>
       </view>
     </navigator>
   </view>

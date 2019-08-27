@@ -12,6 +12,6 @@
         <image hidden="{{screenSize}}" class="btn-icon" src="/images/comment-multiple-outline.png " mode="aspectFit"></image>添加影评
       </button>
     </view>
-    <view class="bg "></view>
+    <view class="bg"></view>
   </view>
 </view>

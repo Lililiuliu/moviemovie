@@ -7,6 +7,7 @@ const db = cloud.database()
 exports.main = async (event, context) => {
   const text = event.text
   const movieID = event.movieID
+  const type = event.type
   const res = await db.collection('movieComments').add({
     data:{
       text: text,

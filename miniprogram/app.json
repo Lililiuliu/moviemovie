@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/addcomment/addcomment",
+    "pages/commentpreview/commentpreview",
     "pages/movies/movies",
     "pages/detail/detail",
     "pages/my/my"

@@ -20,6 +20,9 @@ Page({
 
     db.getMovieDetail(id)
       .then(res => {
+        const summary = res.result.summary.replace(/^\n\s\s/,'')
+        res.result.summary = summary
+
         this.setData({
           detail: res.result
         })
@@ -36,17 +39,27 @@ Page({
       itemList: ['文字', '音频'],
       success: function(res) {
         if (!res.cancel) {
-          console.log(res.tapIndex)
-          console.log(res)
+          // console.log(res.tapIndex)
+          // console.log(res)
           if (res.tapIndex === 0) {
+            
+            const url = '/pages/addcomment/addcomment?&type='
+          
             wx.navigateTo({
-              url: '/pages/addcomment/addcomment?id=',
+              url: url + 'text',
+              success: (res) => {
+                res.eventChannel.emit('acceptDataFromOpenerPage', { data: that.data })
+              }
             })
             app.globalData.detail = that.data.detail
+            app.globalData.addCommentType = "text"
+            
           } else {
             wx.navigateTo({
-              url: '/pages/movies/movies',
+              url: '/pages/addcomment/addcomment?&type=',
             })
+            app.globalData.detail = that.data.detail
+            app.globalData.addCommentType = "voice"
           }
         }
       }

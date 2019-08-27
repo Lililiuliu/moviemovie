@@ -13,7 +13,16 @@ Page({
 
   },
 
-  onLoad: function () {
+  onLoad: function (options) {
+
+    const eventChannel = this.getOpenerEventChannel()
+    eventChannel.on('acceptDataFromOpenerPage', function (data) {
+      console.log(data)
+    })
+    
+    this.setData({
+      'comment.type':options.type,
+    })
     this.setDetail()
   },
 
@@ -33,6 +42,7 @@ Page({
   done() {
     const comment = this.data.comment
     const detail = this.data.detail
+    const that = this
     wx.showLoading({
       title: '正在提交...',
     })
@@ -42,10 +52,20 @@ Page({
         console.log(res)
         wx.hideLoading()
         wx.navigateTo({
-          url: '/pages/index/index',
+          url: '/pages/commentpreview/commentpreview',
+          success:function(res){
+            res.eventChannel.emit('acceptDataFromOpenerPage', {data: that.data})
+          }
         })
       })
-      .catch(console.error)
+      .catch(()=>
+        {
+        wx.showToast({
+          icon: 'none',
+          title: '提交失败，稍后重试',
+        });
+        }
+      )
     } else wx.showToast({
       title: '请输入影评内容',
       icon:'none',
