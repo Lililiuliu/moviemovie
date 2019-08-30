@@ -1,14 +1,18 @@
-
-  <view class="comment-cart">
-    <view class="info">
-      <image class="cover" src="{{detail.img}}" mode="aspectFit"></image>
-      <view class="name">{{detail.name}}</view>
-      <textarea hidden="{{comment.type == 'voice'}}" class="input-comment" placeholder="请输入你的影片内容" adjust-position="true" bindinput="getText" auto-focus="true"></textarea>
-      <button hidden="{{comment.type == 'text'}}">录音</button>
-    </view>
-    <view class="bg"></view>
+<view class="comment-card">
+  <view class="info">
+    <image class="cover" src="{{detail.img}}" mode="aspectFit"></image>
+    <view class="name">{{detail.name}}</view>
+    <view wx:if="{{comment.record.duration}}" class="palyvoice">{{comment.record.duration}}</view>
+    <textarea hidden="{{comment.type == 'voice'}}" class="input-comment" placeholder="请输入你的影片内容" adjust-position="true" bindinput="getText" auto-focus="true"></textarea>
   </view>
+  <button class="record-btn" hidden="{{comment.type == 'text'}}" bindlongtap="touchStart" bindtouchend="endRecord" type="default" plain="true">
+    <image hidden="{{screenSize}}" class="btn-icon" src="/images/microphone-outline.png" mode="aspectFit "></image>
+    录音</button>
+  <view class="bg"></view>
+</view>
 
- <view class="footer" bindtap="done" hover-class="footer-hover">
- 完成
- </view>
+<view class="footer" bindtap="done" hover-class="footer-hover">
+  <button open-type="getUserInfo" class="done-btn" bindgetuserinfo="done">完成</button>
+</view>
+
+<canvas hidden="{{anihidden}}" id="c1" type="2d" style="width: 100px; height: 100px;" bindtouchstart="play" bindtouchend="pause"></canvas>

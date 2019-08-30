@@ -35,6 +35,7 @@ Page({
   // 打开 actionsheet
   open: function() {
     var that = this;
+    var url = '/pages/addcomment/addcomment?&type='
     wx.showActionSheet({
       itemList: ['文字', '音频'],
       success: function(res) {
@@ -42,8 +43,6 @@ Page({
           // console.log(res.tapIndex)
           // console.log(res)
           if (res.tapIndex === 0) {
-            
-            const url = '/pages/addcomment/addcomment?&type='
           
             wx.navigateTo({
               url: url + 'text',
@@ -51,15 +50,15 @@ Page({
                 res.eventChannel.emit('acceptDataFromOpenerPage', { data: that.data })
               }
             })
-            app.globalData.detail = that.data.detail
-            app.globalData.addCommentType = "text"
             
           } else {
             wx.navigateTo({
-              url: '/pages/addcomment/addcomment?&type=',
+              url: url + 'voice',
+              success: (res) => {
+                res.eventChannel.emit('acceptDataFromOpenerPage', { data: that.data })
+              }
             })
-            app.globalData.detail = that.data.detail
-            app.globalData.addCommentType = "voice"
+            
           }
         }
       }
