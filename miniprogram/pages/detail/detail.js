@@ -20,7 +20,7 @@ Page({
 
     db.getMovieDetail(id)
       .then(res => {
-        const summary = res.result.summary.replace(/^\n\s\s/,'')
+        const summary = res.result.summary.replace(/^\n\s\s/, '')
         res.result.summary = summary
 
         this.setData({
@@ -43,22 +43,26 @@ Page({
           // console.log(res.tapIndex)
           // console.log(res)
           if (res.tapIndex === 0) {
-          
+
             wx.navigateTo({
               url: url + 'text',
               success: (res) => {
-                res.eventChannel.emit('acceptDataFromOpenerPage', { data: that.data })
+                res.eventChannel.emit('acceptDataFromOpenerPage', {
+                  data: that.data
+                })
               }
             })
-            
+
           } else {
             wx.navigateTo({
               url: url + 'voice',
               success: (res) => {
-                res.eventChannel.emit('acceptDataFromOpenerPage', { data: that.data })
+                res.eventChannel.emit('acceptDataFromOpenerPage', {
+                  data: that.data
+                })
               }
             })
-            
+
           }
         }
       }

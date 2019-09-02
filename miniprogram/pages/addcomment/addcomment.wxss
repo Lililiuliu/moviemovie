@@ -110,3 +110,33 @@ canvas{
   position: fixed;
   z-index: 999;
 }
+
+.voice{
+  width: 160px;
+  height: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: lightgray;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  padding: 8px 10px;
+  box-sizing: border-box;
+}
+
+.play-icon{
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+}
+
+.pause-icon{
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+}
+
+.duration{
+  height: 24px;
+  line-height: 24px;
+}
+

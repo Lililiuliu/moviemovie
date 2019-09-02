@@ -13,9 +13,10 @@ Page({
    */
   onLoad: function (options) {
     const eventChannel = this.getOpenerEventChannel()
-    eventChannel.on('acceptDataFromOpenerPage', function (data) {
+    eventChannel.on('acceptDataFromAddcommentPage', function (data) {
       console.log(data)
     })
+    console.log(getCurrentPages())
   },
 
   /**

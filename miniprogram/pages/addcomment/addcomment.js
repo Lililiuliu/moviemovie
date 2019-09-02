@@ -2,26 +2,29 @@ const app = getApp()
 const db = require('../../utils/db')
 import lottie from '../lottie-miniprogram'
 const recorderManager = wx.getRecorderManager()
+const innerAudioContext = wx.createInnerAudioContext()
 
 Page({
 
   data: {
     detail: {},
-
     comment: {
       text: null,
       type: null,
-      record: {},
+      record: null,
     },
-    anihidden:false,
-  
+    anihidden: false,
+    playIcon: '/images/play-circle.png',
+    pauseIcon: '/images/pause-circle-outline.png',
+    playing:false
+
 
   },
 
   onLoad: function (options) {
-    
+
     this.setData({
-      'comment.type':options.type,
+      'comment.type': options.type,
     })
     this.setDetail()
   },
@@ -30,7 +33,6 @@ Page({
     var that = this
     var eventChannel = this.getOpenerEventChannel()
     eventChannel.on('acceptDataFromOpenerPage', function (data) {
-
       that.setData({
         detail: data.data.detail
       })
@@ -43,69 +45,80 @@ Page({
     })
   },
 
-// 点击完成按钮提交影评
-  done(userinfo) {
-    console.log(userinfo)
-    const comment = this.data.comment
-    const detail = this.data.detail
-    const that = this
-    wx.showLoading({
-      title: '正在提交...',
+  // 点击完成按钮
+  done(event) {
+
+    // 获取用户信息
+    this.setData({
+      'comment.userInfo': event.detail.userInfo
     })
-    if (comment.text) {
-    db.addComment(comment, detail)
-      .then(res => {
-        console.log(res)
-        wx.hideLoading()
-        wx.navigateTo({
-          url: '/pages/commentpreview/commentpreview',
-          success:function(res){
-            res.eventChannel.emit('acceptDataFromOpenerPage', {data: that.data})
-          }
-        })
-      })
-      .catch(()=>
-        {
-        wx.showToast({
-          icon: 'none',
-          title: '提交失败，稍后重试',
-        });
+
+    const comment = this.data.comment
+    // const detail = this.data.detail
+    const that = this
+
+    // wx.showLoading({
+    //   title: '正在提交...',
+    // })
+    if (comment.text || comment.record) {
+      // 跳转影评预览，并进行数据通信
+      wx.navigateTo({
+        url: '/pages/commentpreview/commentpreview',
+        success: function (res) {
+          res.eventChannel.emit('acceptDataFromAddcommentPage', {
+            data: that.data
+          })
         }
-      )
+      })
+      // db.addComment(comment, detail)
+      //   .then(res => {
+      //     console.log(res)
+      //     wx.hideLoading()
+      //     wx.navigateTo({
+      //       url: '/pages/commentpreview/commentpreview',
+      //       success: function(res) {
+      //         res.eventChannel.emit('acceptDataFromOpenerPage', {
+      //           data: that.data
+      //         })
+      //       }
+      //     })
+      //   })
+      //   .catch(() => {
+      //     wx.showToast({
+      //       icon: 'none',
+      //       title: '提交失败，稍后重试',
+      //     });
+      //   })
     } else wx.showToast({
       title: '请输入影评内容',
-      icon:'none',
+      icon: 'none',
     })
   },
 
-// 按下录音按钮
-  touchStart(){
-      var that = this
-      wx.getSetting({
-        success(res) {
-          if (!res.authSetting['scope.record']) {
-            wx.authorize({
-              scope: 'scope.record',
-              success() {
-                wx.showToast({
-                  title: '授权成功',
-                })
-              }
-            })
-          } else that.startRecord()
-        }
-      })
+  // 按下录音按钮
+  touchStart() {
+    console.log(1)
+    var that = this
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.record']) {
+          wx.authorize({
+            scope: 'scope.record',
+            success() {
+              wx.showToast({
+                title: '授权成功',
+              })
+            }
+          })
+        } else that.startRecord()
+      }
+    })
   },
 
-  startRecord:function(){
+  startRecord: function () {
     recorderManager.onStart(() => {
       console.log('recorder start')
-      // wx.showToast({
-      //   title: '长按录音,松开结束',
-      //   duration: 60000,
-      //   icon:'none'
-      // })
-
+      this.init()
     })
 
     const options = {
@@ -117,15 +130,16 @@ Page({
       frameSize: 50
     }
     recorderManager.start(options)
-    
+
     this.setData({
-      anihidden:false
+      anihidden: false
     })
 
-    this.init()
+    // this.init()
+    innerAudioContext.stop()
   },
 
-  endRecord(){
+  endRecord() {
     var that = this
     // 停止录音
     recorderManager.stop()
@@ -133,14 +147,16 @@ Page({
     recorderManager.onStop((res) => {
       console.log('recorder stop', res)
       that.setData({
-        'comment.record' : res,
+        'comment.record': res,
+        'comment.record.duration': Math.ceil(res.duration / 1000),
         anihidden: true,
       })
     })
 
   },
 
- // lottie动画初始化
+
+  // lottie动画初始化
   init() {
     if (this._inited) {
       return
@@ -164,5 +180,32 @@ Page({
       this._inited = true
     }).exec()
   },
+
+  playVoice() {
+    const src = this.data.comment.record.tempFilePath
+    const time = this.data.comment.record.duration
+    innerAudioContext.src = src
+
+    if (!this.data.playing) {
+      innerAudioContext.play({complete:innerAudioContext.stop()})
+    } else {
+      innerAudioContext.stop()
+    }
+
+    innerAudioContext.onPlay(() => {
+      console.log('开始播放')
+      this.setData({
+        playing: true
+      })
+    })
+
+    innerAudioContext.onStop(() => {
+      console.log('停止播放')
+      this.setData({
+        playing: false
+      })
+    })
+    
+  }
 
 })

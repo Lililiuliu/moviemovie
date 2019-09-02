@@ -2,17 +2,21 @@
   <view class="info">
     <image class="cover" src="{{detail.img}}" mode="aspectFit"></image>
     <view class="name">{{detail.name}}</view>
-    <view wx:if="{{comment.record.duration}}" class="palyvoice">{{comment.record.duration}}</view>
+    <view wx:if="{{comment.record.duration}}" class="voice" bindtap="playVoice">
+      <image hidden="{{playing}}" class="play-icon" src="{{playIcon}}" mode="aspectFit"></image>
+      <image hidden="{{!playing}}" class="pause-icon" src="{{pauseIcon}}" mode="aspectFit"></image>
+      <view class="duration">{{comment.record.duration}}s</view>
+    </view>
     <textarea hidden="{{comment.type == 'voice'}}" class="input-comment" placeholder="请输入你的影片内容" adjust-position="true" bindinput="getText" auto-focus="true"></textarea>
   </view>
   <button class="record-btn" hidden="{{comment.type == 'text'}}" bindlongtap="touchStart" bindtouchend="endRecord" type="default" plain="true">
     <image hidden="{{screenSize}}" class="btn-icon" src="/images/microphone-outline.png" mode="aspectFit "></image>
-    录音</button>
+    长按录音</button>
   <view class="bg"></view>
 </view>
 
-<view class="footer" bindtap="done" hover-class="footer-hover">
+<view class="footer" hover-class="footer-hover">
   <button open-type="getUserInfo" class="done-btn" bindgetuserinfo="done">完成</button>
 </view>
 
-<canvas hidden="{{anihidden}}" id="c1" type="2d" style="width: 100px; height: 100px;" bindtouchstart="play" bindtouchend="pause"></canvas>
+<canvas hidden="{{anihidden}}" id="c1" type="2d" style="width: 100px; height: 100px;"></canvas>
