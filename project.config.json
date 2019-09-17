@@ -21,7 +21,7 @@
 	},
 	"appid": "wx3d855b9737bc545c",
 	"projectname": "moviemovie",
-	"libVersion": "2.8.1",
+	"libVersion": "2.8.2",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
@@ -41,8 +41,12 @@
 		"game": {
 			"list": []
 		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
-			"current": 1,
+			"current": 2,
 			"list": [
 				{
 					"id": 0,
@@ -55,6 +59,27 @@
 					"id": -1,
 					"name": "pages/index/index",
 					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "pages/movies/movies",
+					"pathName": "pages/movies/movies",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/playground/playground",
+					"pathName": "pages/playground/playground",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/commentpreview/commentpreview",
+					"pathName": "pages/commentpreview/commentpreview",
 					"query": "",
 					"scene": null
 				}

@@ -14,7 +14,7 @@
   height: 100%;
   position: relative;
   box-sizing: border-box;
-  width:750rpx;
+  width:100%;
   padding:20px;
 }
 
@@ -55,7 +55,7 @@ page {
 }
 
 .name {
-  font-size: 40rpx;
+  font-size: 20px;
   font-weight: bolder;
   margin-bottom: 20px;
   margin-top:10px;

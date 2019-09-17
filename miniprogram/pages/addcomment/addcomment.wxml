@@ -9,9 +9,10 @@
     </view>
     <textarea hidden="{{comment.type == 'voice'}}" class="input-comment" placeholder="请输入你的影片内容" adjust-position="true" bindinput="getText" auto-focus="true"></textarea>
   </view>
-  <button class="record-btn" hidden="{{comment.type == 'text'}}" bindlongtap="touchStart" bindtouchend="endRecord" type="default" plain="true">
+  <button class="record-btn" hidden="{{comment.type == 'text'}}" bindlongpress="touchStart" bindtouchend="endRecord" type="default" plain="true">
     <image hidden="{{screenSize}}" class="btn-icon" src="/images/microphone-outline.png" mode="aspectFit "></image>
-    长按录音</button>
+    长按录音
+  </button>
   <view class="bg"></view>
 </view>
 

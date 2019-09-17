@@ -1,2 +1,34 @@
-<!--pages/commentpreview/commentpreview.wxml-->
-<text>pages/commentpreview/commentpreview.wxml</text>
+<view class="card">
+  <view class="info">
+    <image class="cover" src="{{detail.img}}" mode="aspectFit"></image>
+    <view class="name">{{detail.name}}</view>
+    <view class="userInfo">
+      <image class="userAvatar" src="{{comment.userInfo.avatarUrl}}" mode="aspectFit"></image>
+      <view class="userNamer">{{comment.userInfo.nickName}}的影评</view>
+    </view>
+    <view class="comment">
+      <view wx:if="{{comment.text}}" class="text">
+        <image class="quote" src="/images/format-quote.png" mode="aspectFit"></image>
+        <view class="content">{{comment.text}}</view>
+      </view>
+      <view wx:if="{{comment.record.duration}}" class="record">
+        <image class="quote" src="/images/format-quote.png" mode="aspectFit"></image>
+        <view class="voice" bindtap="playVoice">
+          <image hidden="{{playing}}" class="play-icon" src="/images/play-circle.png" mode="aspectFit"></image>
+          <image hidden="{{!playing}}" class="pause-icon" src="/images/pause-circle-outline.png" mode="aspectFit"></image>
+          <view class="duration">{{comment.record.duration}}s</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="block"></view>
+  <view class="bg">
+    <view class="button-sp-area">
+      <button type="default" plain="true" bindtap="back">
+        <image hidden="{{screenSize}}" class="btn-icon" src="/images/repeat.png" mode="aspectFit "></image>重新编辑</button>
+      <button type="default" plain="true" bindtap="send">
+        <image hidden="{{screenSize}}" class="btn-icon" src="/images/send.png " mode="aspectFit"></image>发布影评
+      </button>
+    </view>
+  </view>
+</view>

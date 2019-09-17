@@ -1,70 +1,112 @@
-// pages/commentpreview/commentpreview.js
+const db = require('../../utils/db')
+const innerAudioContext = wx.createInnerAudioContext()
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    detail: null,
+    comment: null,
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  onLoad: function(options) {
+    const that = this
     const eventChannel = this.getOpenerEventChannel()
-    eventChannel.on('acceptDataFromAddcommentPage', function (data) {
+    eventChannel.on('acceptDataFromAddcommentPage', function(data) {
       console.log(data)
+      that.setData({
+        detail: data.data.detail,
+        comment: data.data.comment
+      })
     })
-    console.log(getCurrentPages())
+    console.log(this.data)
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+  back: function() {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+
+  playVoice() {
+    const src = this.data.comment.record.tempFilePath
+    const time = this.data.comment.record.duration
+    innerAudioContext.src = src
+
+    if (!this.data.playing) {
+      innerAudioContext.play({
+        complete: innerAudioContext.stop()
+      })
+    } else {
+      innerAudioContext.stop()
+    }
+
+    innerAudioContext.onPlay(() => {
+      console.log('开始播放')
+      this.setData({
+        playing: true
+      })
+    })
+
+    innerAudioContext.onStop(() => {
+      console.log('停止播放')
+      this.setData({
+        playing: false
+      })
+    })
+  },
+
+  send() {
+    const comment = this.data.comment
+    const detail = this.data.detail
+    const that = this
+
+    wx.showLoading({
+      title: '正在提交...',
+    })
+
+    if (comment.type == 'voice') {
+      console.log('上传临时文件')
+      const filePath = comment.record.tempFilePath
+      const cloudPath = `${that.guid()}${filePath.match(/\.[^.]+?$/)[0]}`;
+      //上传临时文件，获取地址
+      wx.cloud.uploadFile({
+        cloudPath, // 上传至云端的路径
+        filePath: comment.record.tempFilePath, // 小程序临时文件路径
+        success: res => {
+          comment.record.tempFilePath = res.fileID
+        },
+        fail: console.error
+      })
+    }
+
+    db.addComment(comment, detail)
+      .then(res => {
+        console.log(res)
+        wx.hideLoading()
+        wx.navigateBack({
+          delta: 2
+        })
+        wx.showToast({
+          title: '提交成功',
+          icon: 'success',
+        })
+      })
+    // .catch(() => {
+    //   wx.showToast({
+    //     icon: 'none',
+    //     title: '提交失败，稍后重试',
+    //   });
+    // })
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+  guid() {
+    return  'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) =>  {
+      const  r  = Math.random() * 16 | 0,
+        v =  c  == 'x'  ? r  : (r & 0x3 | 0x8);
 
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+      return v.toString(16);
+    });
   }
+
 })

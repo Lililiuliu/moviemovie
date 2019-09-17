@@ -21,13 +21,15 @@ module.exports = {
 
   // 调用云函数，添加评论
   addComment(comment,detail){
-    const movieID = detail.id
+    // const movieID = detail.id
     const text = comment.text
     return wx.cloud.callFunction({
       name: 'addComment',
       data:{
-        movieID: movieID,
+        // movieID: movieID,
         text:text,
+        comment:comment,
+        detail:detail,
       },
     })
   },
