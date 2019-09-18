@@ -35,5 +35,10 @@ module.exports = {
   },
 
   // 随机获取评论
+  getRandomMovie(){
+    return wx.cloud.callFunction({
+      name:'getRandomMovie',
+    })
+  }
 
 }
