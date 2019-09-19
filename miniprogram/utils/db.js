@@ -37,7 +37,17 @@ module.exports = {
   // 随机获取评论
   getRandomMovie(){
     return wx.cloud.callFunction({
-      name:'getRandomMovie',
+      name:'getRandomMovie'
+    })
+  },
+
+  // 获取评论详情
+  getCommentDetail(commentId){
+    return wx.cloud.callFunction({
+      name:'getCommentDetail',
+      data:{
+        commentId
+      }
     })
   }
 

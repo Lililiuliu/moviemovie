@@ -70,25 +70,6 @@ Page({
           })
         }
       })
-      // db.addComment(comment, detail)
-      //   .then(res => {
-      //     console.log(res)
-      //     wx.hideLoading()
-      //     wx.navigateTo({
-      //       url: '/pages/commentpreview/commentpreview',
-      //       success: function(res) {
-      //         res.eventChannel.emit('acceptDataFromOpenerPage', {
-      //           data: that.data
-      //         })
-      //       }
-      //     })
-      //   })
-      //   .catch(() => {
-      //     wx.showToast({
-      //       icon: 'none',
-      //       title: '提交失败，稍后重试',
-      //     });
-      //   })
     } else wx.showToast({
       title: '请输入影评内容',
       icon: 'none',

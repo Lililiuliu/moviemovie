@@ -5,7 +5,8 @@
     "pages/commentpreview/commentpreview",
     "pages/movies/movies",
     "pages/detail/detail",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/commentdetail/commentdetail"
   ],
   "window": {
     "navigationBarTextStyle": "black",

@@ -1,10 +1,12 @@
 <view class="page">
   <view class="comment">
-    <image class="poster" src="https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2563780504.jpg" mode="aspectFit" ></image>
-    <view class="name">哪吒之魔童降世</view>
-    <view class="userInfo">
-      <image class="userAvatar" src="https://wx.qlogo.cn/mmopen/vi_32/Q3auHgzwzM6PvyzKwOPLbRYN3uuVAexatHO4jb4SvWZ9LBBKwMrIK3bpYpwibhwEZmCdiboIHScSicVJ2qWfS82Qw/132" mode="aspectFit"></image>
-      <view class="userNamer">王震给你推荐了一部电影</view>
+    <navigator class="movieInfo" url="/pages/detail/detail?id={{movieId}}">
+      <image class="poster" src="{{poster}}" mode="aspectFit"></image>
+      <view class="name">{{name}}</view>
+    </navigator>
+    <view class="userInfo" bindtap="tapUser">
+      <image class="userAvatar" src="{{userAvatar}}" mode="aspectFit"></image>
+      <view wx:if="{{userName}}" class="userNamer">{{userName}}给你推荐了一部电影</view>
     </view>
   </view>
   <view class="weui-footer_fixed-bottom">
