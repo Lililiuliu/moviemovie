@@ -40,7 +40,7 @@ Page({
       url: '/pages/commentdetail/commentdetail',
       success: function (res) {
         res.eventChannel.emit('acceptDataFromIndexPage', {
-          commentId: that.data.commentId
+          commentId
         })
       }
     })

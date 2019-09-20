@@ -15,6 +15,7 @@ Page({
     })
     const eventChannel = this.getOpenerEventChannel()
     eventChannel.on('acceptDataFromIndexPage', function(data) {
+      console.log(data)
       db.getCommentDetail(data.commentId)
         .then(res=>{
           wx.hideLoading()

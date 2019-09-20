@@ -59,7 +59,13 @@ module.exports = {
         movieId
       }
     })
+  },
+  
+  // 查询创建的影评
+  getMyComments() {
+    return wx.cloud.callFunction({
+      name: 'getMyComments'
+    })
   }
-
 
 }
