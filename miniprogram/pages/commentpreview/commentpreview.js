@@ -8,7 +8,7 @@ Page({
     comment: null,
   },
 
-  onLoad: function(options) {
+  onLoad(options) {
     const that = this
     const eventChannel = this.getOpenerEventChannel()
     eventChannel.on('acceptDataFromAddcommentPage', function(data) {
@@ -21,7 +21,7 @@ Page({
     console.log(this.data)
   },
 
-  back: function() {
+  back() {
     wx.navigateBack({
       delta: 1
     })
@@ -91,12 +91,12 @@ Page({
           icon: 'success',
         })
       })
-    // .catch(() => {
-    //   wx.showToast({
-    //     icon: 'none',
-    //     title: '提交失败，稍后重试',
-    //   });
-    // })
+    .catch(() => {
+      wx.showToast({
+        icon: 'none',
+        title: '提交失败，稍后重试',
+      });
+    })
 
   },
 

@@ -49,6 +49,17 @@ module.exports = {
         commentId
       }
     })
+  },
+
+  // 查询电影影评列表
+  getCommentsList(movieId){
+    return wx.cloud.callFunction({
+      name: 'getCommentsList',
+      data: {
+        movieId
+      }
+    })
   }
+
 
 }

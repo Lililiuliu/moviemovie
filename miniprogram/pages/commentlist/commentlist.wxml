@@ -1,0 +1,19 @@
+<view class="page">
+  <view class="comment-list">
+    <view class="comment-item" wx:key="index" id="{{item._id}}" wx:for="{{comments}}" wx:for-item="item" bindtap="tap" hover-class="item-hover">
+      <view class="userInfo">
+        <image class="userAvatar" src="{{item.comment.userInfo.avatarUrl}}" mode="aspectFit"></image>
+        <view class="userName">{{item.comment.userInfo.nickName}}</view>
+      </view>
+      <view wx:if="{{item.comment.text}}" class="text">{{item.comment.text}}</view>
+      <view wx:if="{{item.comment.record.duration}}" class="voice" bindtap="playVoice">
+        <image class="play-icon" src="/images/play-circle.png" mode="aspectFit"></image>
+        <view class="duration">{{item.comment.record.duration}}s</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-footer_fixed-bottom">
+    <view class="back" bindtap="home">回到首页</view>
+  </view>
+</view>

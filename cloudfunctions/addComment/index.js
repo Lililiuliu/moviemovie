@@ -12,8 +12,6 @@ exports.main = async (event, context) => {
   const detail = event.detail
   const res = await db.collection('movieComments').add({
     data:{
-      text: text,
-      // movieID: movieID,
       openId: event.userInfo.openId,
       comment:comment,
       detail:detail,

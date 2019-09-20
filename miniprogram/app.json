@@ -6,7 +6,8 @@
     "pages/movies/movies",
     "pages/detail/detail",
     "pages/my/my",
-    "pages/commentdetail/commentdetail"
+    "pages/commentdetail/commentdetail",
+    "pages/commentlist/commentlist"
   ],
   "window": {
     "navigationBarTextStyle": "black",

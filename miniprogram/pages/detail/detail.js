@@ -31,11 +31,18 @@ Page({
       .catch(console.error)
   },
 
+  // 跳转影评列表页
+  getComments(){
+    wx.navigateTo({
+      url: '/pages/commentlist/commentlist?movieId='+this.data.detail.id,
+    })
+  },
+
 
   // 打开 actionsheet
   open: function() {
     var that = this;
-    var url = '/pages/addcomment/addcomment?&type='
+    var url = '/pages/addcomment/addcomment?type='
     wx.showActionSheet({
       itemList: ['文字', '音频'],
       success: function(res) {

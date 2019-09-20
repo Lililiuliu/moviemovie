@@ -6,7 +6,7 @@
       <view class="summary">{{detail.summary}}</view>
     </view>
     <view class="button-sp-area">
-      <button type="default" plain="true">
+      <button type="default" plain="true" bindtap="getComments">
         <image hidden="{{screenSize}}" class="btn-icon" src="/images/eye.png" mode="aspectFit "></image>查看影评</button>
       <button type="default" plain="true" bindtap="open">
         <image hidden="{{screenSize}}" class="btn-icon" src="/images/comment-multiple-outline.png " mode="aspectFit"></image>添加影评
