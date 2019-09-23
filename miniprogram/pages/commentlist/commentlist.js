@@ -7,21 +7,11 @@ Page({
   },
 
   onLoad: function (options) {
-    const that = this
     const movieId = options.movieId
-
-    wx.showLoading({
-      title: '加载中...',
+    this.setData({
+      movieId
     })
-
-    db.getCommentsList(movieId)
-    .then( res =>{
-      wx.hideLoading()
-
-      this.setData({
-        comments:res.result
-      })
-    })
+    this.getComments(movieId)
   },
 
   home() {
@@ -44,7 +34,38 @@ Page({
         })
       }
     })
-  }
+  },
+
+  getComments(movieId,callback){
+    const that = this
+
+    wx.showLoading({
+      title: '加载中...',
+    })
+
+    db.getCommentsList(movieId)
+      .then(res => {
+        wx.hideLoading()
+        this.setData({
+          comments: res.result
+        })
+      })
+
+    callback && callback()
+  },
+
+  onPullDownRefresh() {
+    const movieId = this.data.movieId
+    this.getComments(movieId,() => {
+      wx.stopPullDownRefresh()
+      wx.showToast({
+        title: '加载完成',
+        icon: 'success',
+        duration: 1000
+      })
+    })
+  },
+
 
 
 })

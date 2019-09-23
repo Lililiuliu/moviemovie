@@ -73,30 +73,53 @@ Page({
         cloudPath, // 上传至云端的路径
         filePath: comment.record.tempFilePath, // 小程序临时文件路径
         success: res => {
+          console.log(res.fileID)
           comment.record.tempFilePath = res.fileID
+
+          db.addComment(comment, detail)
+            .then(res => {
+              console.log(res)
+              wx.hideLoading()
+              wx.navigateBack({
+                delta: 2
+              })
+              wx.showToast({
+                title: '提交成功',
+                icon: 'success',
+              })
+            })
+            .catch(() => {
+              wx.showToast({
+                icon: 'none',
+                title: '提交失败，稍后重试',
+              });
+            })
+          
         },
         fail: console.error
       })
-    }
+    } else {
 
-    db.addComment(comment, detail)
-      .then(res => {
-        console.log(res)
-        wx.hideLoading()
-        wx.navigateBack({
-          delta: 2
+      db.addComment(comment, detail)
+        .then(res => {
+          console.log(res)
+          wx.hideLoading()
+          wx.navigateBack({
+            delta: 2
+          })
+          wx.showToast({
+            title: '提交成功',
+            icon: 'success',
+          })
         })
-        wx.showToast({
-          title: '提交成功',
-          icon: 'success',
+        .catch(() => {
+          wx.showToast({
+            icon: 'none',
+            title: '提交失败，稍后重试',
+          });
         })
-      })
-    .catch(() => {
-      wx.showToast({
-        icon: 'none',
-        title: '提交失败，稍后重试',
-      });
-    })
+
+    }
 
   },
 

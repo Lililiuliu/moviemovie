@@ -66,6 +66,41 @@ module.exports = {
     return wx.cloud.callFunction({
       name: 'getMyComments'
     })
-  }
+  },
+  // 查询收藏的影评
+  getStarComments() {
+    return wx.cloud.callFunction({
+      name: 'getStarComments'
+    })
+  },
 
+ // 查询我的影评
+  checkMyComment(movieId) {
+    return wx.cloud.callFunction({
+      name: 'checkMyComment',
+      data: {
+        movieId
+      }
+    })
+  },
+
+  starComment(commentId){
+    return wx.cloud.callFunction({
+      name: 'starComment',
+      data: {
+        commentId
+      }
+    })
+  },
+
+  addStarComment(commentId, comment, detail){
+    return wx.cloud.callFunction({
+      name: 'addStarComment',
+      data: {
+        commentId,
+        comment,
+        detail
+      }
+    })
+  }
 }

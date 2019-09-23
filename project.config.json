@@ -4,6 +4,7 @@
 	"setting": {
 		"urlCheck": true,
 		"es6": true,
+		"enhance": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
@@ -17,7 +18,7 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"enhance": true
+		"nodeModules": true
 	},
 	"appid": "wx3d855b9737bc545c",
 	"projectname": "moviemovie",

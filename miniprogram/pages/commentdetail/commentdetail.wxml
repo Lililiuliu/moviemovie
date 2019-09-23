@@ -11,9 +11,9 @@
         <image class="quote" src="/images/format-quote.png" mode="aspectFit"></image>
         <view class="content">{{comment.text}}</view>
       </view>
-      <view wx:if="{{comment.record.duration}}" class="record">
+      <view wx:if="{{comment.record.duration}}" class="record" bindtap="playVoice">
         <image class="quote" src="/images/format-quote.png" mode="aspectFit"></image>
-        <view class="voice" bindtap="playVoice">
+        <view class="voice" >
           <image hidden="{{playing}}" class="play-icon" src="/images/play-circle.png" mode="aspectFit"></image>
           <image hidden="{{!playing}}" class="pause-icon" src="/images/pause-circle-outline.png" mode="aspectFit"></image>
           <view class="duration">{{comment.record.duration}}s</view>
@@ -24,10 +24,13 @@
   <view class="block"></view>
   <view class="bg">
     <view class="button-sp-area">
-      <button type="default" plain="true" bindtap="back">
+      <button type="default" plain="true" bindtap="starComment">
         <image hidden="{{screenSize}}" class="btn-icon" src="/images/star.png" mode="aspectFit "></image>收藏影评</button>
-      <button type="default" plain="true" bindtap="open">
+      <button wx:if="{{!myComment}}" type="default" plain="true" bindtap="open">
         <image hidden="{{screenSize}}" class="btn-icon" src="/images/comment-multiple-outline.png " mode="aspectFit"></image>添加影评
+      </button>
+      <button wx:if="{{myComment}}" type="default" plain="true" bindtap="open">
+        <image hidden="{{screenSize}}" class="btn-icon" src="/images/comment-multiple-outline.png " mode="aspectFit"></image>我的影评
       </button>
     </view>
   </view>

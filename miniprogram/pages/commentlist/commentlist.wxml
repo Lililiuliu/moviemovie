@@ -6,7 +6,7 @@
         <view class="userName">{{item.comment.userInfo.nickName}}</view>
       </view>
       <view wx:if="{{item.comment.text}}" class="text">{{item.comment.text}}</view>
-      <view wx:if="{{item.comment.record.duration}}" class="voice" bindtap="playVoice">
+      <view wx:if="{{item.comment.record.duration}}" class="voice">
         <image class="play-icon" src="/images/play-circle.png" mode="aspectFit"></image>
         <view class="duration">{{item.comment.record.duration}}s</view>
       </view>

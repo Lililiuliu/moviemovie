@@ -8,8 +8,11 @@
     <view class="button-sp-area">
       <button type="default" plain="true" bindtap="getComments">
         <image hidden="{{screenSize}}" class="btn-icon" src="/images/eye.png" mode="aspectFit "></image>查看影评</button>
-      <button type="default" plain="true" bindtap="open">
+      <button wx:if="{{!myComment}}" type="default" plain="true" bindtap="open">
         <image hidden="{{screenSize}}" class="btn-icon" src="/images/comment-multiple-outline.png " mode="aspectFit"></image>添加影评
+      </button>
+      <button wx:if="{{myComment}}" type="default" plain="true" bindtap="open">
+        <image hidden="{{screenSize}}" class="btn-icon" src="/images/comment-multiple-outline.png " mode="aspectFit"></image>我的影评
       </button>
     </view>
     <view class="bg"></view>

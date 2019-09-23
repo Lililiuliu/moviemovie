@@ -12,8 +12,8 @@ const db = cloud.database()
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   const openId = wxContext.OPENID
-  
-  const res = await db.collection('movieComments').where({openId: openId}).get()
+
+  const res = await db.collection('starComments').where({ _openid: openId }).get()
   const comments = res.data
   return comments
 }

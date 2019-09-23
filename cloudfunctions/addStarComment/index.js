@@ -5,20 +5,17 @@ const db = cloud.database()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-
   const wxContext = cloud.getWXContext()
   const openId = wxContext.OPENID
-  const commentId = event.comment
-  const detail = event.detail
 
-  const res = await db.collection('movieComments').add({
+  const res = await db.collection('starComments').add({
     data:{
-      openId: openId,
-      comment:comment,
-      detail:detail,
-      date:Date.now()
+      _openid:openId,
+      comment:event.comment,
+      detail:event.detail,
+      commentId:event.commentId
     }
   })
+
   return res
 }
-
